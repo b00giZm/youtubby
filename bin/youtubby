@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+const parseArgs = require('minimist');
+const { urlFromId } = require('../lib/video');
+
+const argv = parseArgs(process.argv.slice(2));
+
+const videoId = argv._[0];
+
+if (!videoId) {
+  console.error('Missing video ID!');
+  process.exit(1);
+}
+
+urlFromId(videoId)
+  .then(url => console.log(url))
+  .catch(err => {
+    console.error(err.message);
+    process.exit(1);
+  })
+;

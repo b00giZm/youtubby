@@ -1,0 +1,29 @@
+{
+  "name": "youtubby",
+  "version": "1.0.0",
+  "description": "Extract audio from Youtube videos",
+  "bin": "./bin/youtubby",
+  "scripts": {
+    "test": "tape -r babel-register"
+  },
+  "keywords": [
+    "youtube",
+    "downloader",
+    "mp3"
+  ],
+  "author": "Pascal Cremer <b00gizm@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "babel-register": "^6.9.0",
+    "blue-tape": "^0.2.0"
+  },
+  "dependencies": {
+    "lodash.filter": "^4.4.0",
+    "lodash.map": "^4.4.0",
+    "lodash.reduce": "^4.4.0",
+    "lodash.zip": "^4.0.0",
+    "minimist": "^1.2.0",
+    "request": "^2.72.0"
+  }
+}
