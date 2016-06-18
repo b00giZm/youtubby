@@ -2,6 +2,7 @@
   "name": "youtubby",
   "version": "1.0.0",
   "description": "Extract audio from Youtube videos",
+  "repository": "https://github.com/b00giZm/youtubby",
   "bin": "./bin/youtubby",
   "scripts": {
     "test": "tape -r babel-register"
@@ -19,11 +20,15 @@
     "blue-tape": "^0.2.0"
   },
   "dependencies": {
+    "fluent-ffmpeg": "^2.1.0",
     "lodash.filter": "^4.4.0",
     "lodash.map": "^4.4.0",
     "lodash.reduce": "^4.4.0",
     "lodash.zip": "^4.0.0",
+    "mime": "^1.3.4",
     "minimist": "^1.2.0",
-    "request": "^2.72.0"
+    "progress": "^1.1.8",
+    "request": "^2.72.0",
+    "tmp": "0.0.28"
   }
 }

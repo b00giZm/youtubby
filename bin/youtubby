@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 
 const parseArgs = require('minimist');
-const { urlFromId } = require('../lib/video');
+const ProgressBar = require('progress');
+const downloader = require('../lib/downloader');
+const converter = require('../lib/converter');
+const { videoTitleFromId, videoUrlFromId } = require('../lib/utils');
 
 const argv = parseArgs(process.argv.slice(2));
 
@@ -12,8 +15,32 @@ if (!videoId) {
   process.exit(1);
 }
 
-urlFromId(videoId)
-  .then(url => console.log(url))
+const bar = new ProgressBar('Downloading [:bar] :percent :etas', {
+  total: 100,
+  width: 40
+});
+
+downloader.on('progress', percentage => {
+  bar.tick();
+});
+
+return Promise
+  .all([
+    videoTitleFromId(videoId),
+    videoUrlFromId(videoId).then(url => downloader.load(url))
+  ])
+  .then(values => {
+    const outfile = values[0] + '.mp3';
+    const tmpFile = values[1];
+
+    console.log(`Converting and saving to '${outfile}'…`);
+
+    return converter.toMP3(tmpFile.name, tmpFile.removeCallback, { outfile })
+  })
+  .then(() => {
+    console.log('All done!');
+    process.exit(0);
+  })
   .catch(err => {
     console.error(err.message);
     process.exit(1);
